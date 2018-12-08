@@ -35,6 +35,7 @@ func (cls *Classifier) Swap(i, j int) {
 }
 
 // New : 分類器の作成。
+// Params:
 //       k --- 調べる近傍点の個数
 //       numDataElm --- データの要素の個数 (!=データの個数)
 //       numLabels --- ラベルの個数（0<=ラベル番号<numLabels）
