@@ -1,6 +1,7 @@
 package knn_test
 
 func Example() {
+	// import "github.com/bunji2/knn"
 
 	data := [][]float32{
 		[]float32{11, 11},
