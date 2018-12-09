@@ -83,18 +83,28 @@ func (cls *Classifier) Predict(data []float32) (label int) {
 	cls.calcDistances(data)
 	// 距離を昇順でソート
 	sort.Sort(cls)
+	//fmt.Println("cls.distances =", cls.distances)
+	// 最近傍点との距離が 0 なら最近傍点のラベルを回答とする。
+	if cls.distances[0].distance == float32(0) {
+		idx := cls.distances[0].idx
+		label = cls.labels[idx]
+		return
+	}
+
 	// k 個の近傍点のラベルの個数を集計
 	labelCounts := make([]int, cls.numLabels)
 	for i := 0; i < cls.k; i++ {
 		idx := cls.distances[i].idx
-		label := cls.labels[idx]
-		labelCounts[label] = labelCounts[label] + 1
+		lbl := cls.labels[idx]
+		labelCounts[lbl] = labelCounts[lbl] + 1
 	}
+	//fmt.Println("labelCounts =", labelCounts)
 	// 最も多かったラベルを決定
 	maxCount := 0
 	for i, count := range labelCounts {
 		if count > maxCount {
 			label = i
+			maxCount = count
 		}
 	}
 	return
@@ -122,4 +132,3 @@ func calcDistance(xx, xx2 []float32) (r float32) {
 	r = float32(math.Sqrt(s))
 	return
 }
-
