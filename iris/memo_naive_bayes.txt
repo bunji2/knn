@@ -2,7 +2,7 @@
 https://qiita.com/ishizakiiii/items/07cc7e463dceb3efe1a1
 
 学習データ：
-    カテゴリ：C0, ..., Cl
+    カテゴリ：C0, ..., Cl (カテゴリ数=l+1)
     文書：D0, ..., Dm
     各文書はいずれかのカテゴリに排他的に分類されること。
 
@@ -30,12 +30,12 @@ P(D|Ci)
 P(Ci|D)
     文書DkがカテゴリCiに属する確率。
     カテゴリー出現率 P(Ci)とカテゴリー内の文書出現率 P(D|Ci)を掛け合わせたもの
-　　P(Ci|D) ∝ P(Ci) x P(Dk|Ci)
+　　P(Ci|D) ∝ P(Ci) x P(D|Ci)
              = P(Ci) x P(W0|Ci) x ... x P(Wn|Ci)
     ★単語数が多いと分母の値が非常に大きくなりアンダーフローが起きる恐れがあるので、
     これを回避すべく対数をとる。
 
-    log(P(Ci|D)) ∝ log( P(Ci) x P(Dk|Ci) )
+    log(P(Ci|D)) ∝ log( P(Ci) x P(D|Ci) )
                  = log( P(Ci) x P(W0|Ci) x ... x P(Wn|Ci) )
                  = log(P(Ci)) + log(P(W0|Ci)) + ... + log(P(Wn|Ci))
 
